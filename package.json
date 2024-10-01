@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express": "^4.21.0",
+    "marked": "^14.1.2",
+    "service-worker-router": "^1.7.5"
+  }
+}
