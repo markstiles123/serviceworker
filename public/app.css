@@ -1,0 +1,71 @@
+@view-transition {
+    navigation: auto;
+    types:forwards,backwards;
+}
+
+body,html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body{
+    background-color: black;
+    color: white;
+    display: grid;
+    grid-template-rows: 10% 90%;
+}
+header{
+    view-transition-name: header;
+    background-color: #6d2bf2;
+    display: grid;
+    place-content: center;
+}
+main{
+    overflow-y: scroll;
+}
+@keyframes move-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes move-out {
+    to {
+        transform: translateX(-100%);
+    }
+}
+@keyframes slide-in {
+    from {transform: translateX(-100%);}
+    to{transform:translateX(0) ;}
+}
+@keyframes slide-out {
+    to{transform: translateX(100%);}
+}
+
+
+html:active-view-transition-type(forwards, backwards){
+    :root{
+        view-transition-name: root;
+    }
+
+}
+html:active-view-transition-type(forwards){
+&::view-transition-old(root){
+    animation-name: move-out;
+}
+&::view-transition-new(root){
+    animation-name: move-in;
+}
+}
+html:active-view-transition-type(backwards){
+    &::view-transition-old(root){
+        animation-name: slide-out;
+    }
+    &::view-transition-new(root){
+        animation-name: slide-in;
+    }
+    }

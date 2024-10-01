@@ -1,0 +1,27 @@
+</main>
+<script>
+    let title=document.querySelector('title')
+    title.text+='home'
+    navigator.serviceWorker.register('/sw.js',{type:'module'})
+    window.addEventListener('pageswap', e => {
+    if (e.viewTransition) {
+        e.viewTransition.types.add(sessionStorage.getItem('direction'))
+    }
+})
+window.addEventListener('pagereveal', e => {
+    if (e.viewTransition) {
+        e.viewTransition.types.add(sessionStorage.getItem('direction'))
+    }
+})
+
+navigation.addEventListener('navigate', nav => {
+    if (nav.navigationType == 'traverse' && nav.destination.index < navigation.currentEntry.index) {
+        sessionStorage.setItem('direction', 'backwards')
+    } else {
+        sessionStorage.setItem('direction', 'forwards')
+    }
+})
+
+</script>
+</body>
+</html>
